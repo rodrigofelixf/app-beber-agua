@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:fillViewport="true"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
@@ -17,11 +17,15 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@drawable/container_header"
+            app:cardElevation="8dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/img_beber_agua"
             android:layout_width="100dp"
             android:layout_height="80dp"
             android:layout_marginStart="20dp"
@@ -93,30 +97,41 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/edit_peso" />
 
-        <View
+        <androidx.cardview.widget.CardView
+
             android:id="@+id/container_resultado_ml"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:layout_marginStart="50dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="50dp"
-            android:background="@drawable/container_resultado_ml"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="8dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_calcular" />
+            app:layout_constraintTop_toBottomOf="@id/button_calcular">
 
-        <TextView
-            android:id="@+id/text_resultado_ml"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@android:color/holo_blue_dark"
-            android:textSize="35sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/container_resultado_ml"
-            app:layout_constraintEnd_toEndOf="@id/container_resultado_ml"
-            app:layout_constraintStart_toStartOf="@id/container_resultado_ml"
-            app:layout_constraintTop_toTopOf="@id/container_resultado_ml" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_degrade_button"
+                android:orientation="vertical">
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_resultado_ml"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text=""
+                android:textColor="@android:color/white"
+                android:textSize="35sp"
+                android:textStyle="bold" />
+        </androidx.cardview.widget.CardView>
 
         <Button
             android:id="@+id/buttom_definir_lembrente"

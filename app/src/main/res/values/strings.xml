@@ -11,6 +11,7 @@
     <string name="alerta_campo_vazio">Preencha todos os campos!</string>
     <string name="dialog_titulo">Redefinir dados</string>
     <string name="dialog_descricao">Deseja excluir todos os dados existentes?</string>
+    <string name="alarme_mensagem">Hora de Beber Água</string>
 
 
 
