@@ -57,7 +57,6 @@ class MainActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, R.string.alerta_campo_vazio, Toast.LENGTH_SHORT).show()
             }
-
         }
     }
 
@@ -102,8 +101,7 @@ class MainActivity : AppCompatActivity() {
 
     fun initAlarme() {
         binding.buttomAlarme.setOnClickListener {
-            if (!binding.textHora.text.toString().isEmpty() && !binding.textMinutos.text.toString()
-                    .isEmpty()
+            if (binding.textHora.text.toString().isNotEmpty() && binding.textMinutos.text.toString().isNotEmpty()
             ) {
                 val intent = Intent(AlarmClock.ACTION_SET_ALARM)
                 intent.putExtra(AlarmClock.EXTRA_HOUR, binding.textHora.text.toString().toInt())
@@ -117,7 +115,6 @@ class MainActivity : AppCompatActivity() {
                 if (intent.resolveActivity(packageManager) != null) {
                     startActivity(intent)
                 }
-
             }
         }
     }
