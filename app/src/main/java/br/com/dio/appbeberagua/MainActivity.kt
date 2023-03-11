@@ -40,15 +40,11 @@ class MainActivity : AppCompatActivity() {
         initLembrete()
         initAlarme()
 
-
     }
-
 
     fun calcularAgua() {
         binding.buttonCalcular.setOnClickListener {
-            if(editTextIsEmpty()) {
-                Toast.makeText(this, R.string.alerta_campo_vazio, Toast.LENGTH_SHORT).show()
-            } else {
+            if (!editTextIsEmpty()) {
                 val peso = binding.editPeso.text.toString().toDouble()
                 val idade = binding.editIdade.text.toString().toInt()
                 val resultadoMl = CalcularIngestaoDiaria.calcularTotalML(peso, idade).toInt()
@@ -58,6 +54,8 @@ class MainActivity : AppCompatActivity() {
                 val anim = AnimationUtils.loadAnimation(this, R.anim.rotate)
                 binding.textResultadoMl.startAnimation(anim)
 
+            } else {
+                Toast.makeText(this, R.string.alerta_campo_vazio, Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -80,8 +78,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun editTextIsEmpty() : Boolean {
-        return (binding.editPeso.text.toString().isEmpty() || binding.editIdade.text.toString().isEmpty())
+    private fun editTextIsEmpty(): Boolean {
+        return (binding.editPeso.text.toString().isEmpty() || binding.editIdade.text.toString()
+            .isEmpty())
     }
 
     fun initLembrete() {
@@ -92,20 +91,26 @@ class MainActivity : AppCompatActivity() {
             horaAtual = calendario.get(Calendar.HOUR_OF_DAY)
             minutoAtual = calendario.get(Calendar.MINUTE)
 
-            timePickerDialog = TimePickerDialog(this, {timePicker: TimePicker, hourOfDay: Int, minutes: Int ->
-                binding.textHora.text = String.format("%02d", hourOfDay)
-                binding.textMinutos.text = String.format("%02d", minutes)
-            }, horaAtual, minutoAtual, true)
+            timePickerDialog =
+                TimePickerDialog(this, { timePicker: TimePicker, hourOfDay: Int, minutes: Int ->
+                    binding.textHora.text = String.format("%02d", hourOfDay)
+                    binding.textMinutos.text = String.format("%02d", minutes)
+                }, horaAtual, minutoAtual, true)
             timePickerDialog.show()
         }
     }
 
     fun initAlarme() {
         binding.buttomAlarme.setOnClickListener {
-            if (!binding.textHora.text.toString().isEmpty() && !binding.textMinutos.text.toString().isEmpty()) {
+            if (!binding.textHora.text.toString().isEmpty() && !binding.textMinutos.text.toString()
+                    .isEmpty()
+            ) {
                 val intent = Intent(AlarmClock.ACTION_SET_ALARM)
                 intent.putExtra(AlarmClock.EXTRA_HOUR, binding.textHora.text.toString().toInt())
-                intent.putExtra(AlarmClock.EXTRA_HOUR, binding.textMinutos.text.toString().toInt())
+                intent.putExtra(
+                    AlarmClock.EXTRA_MINUTES,
+                    binding.textMinutos.text.toString().toInt()
+                )
                 intent.putExtra(AlarmClock.EXTRA_MESSAGE, getString(R.string.alarme_mensagem))
                 startActivity(intent)
 
